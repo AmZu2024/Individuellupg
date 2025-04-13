@@ -9,7 +9,11 @@ namespace OperationOOP.Core.Models
     //StrengthExercise ärver från Exercise 
     public class StrengthExercise : Exercise
     {
-     
+        public string MuscleGroup { get; set; }
+        public int Repetitions { get; set; }
+        public int Sets { get; set; }
+        public int Weight { get; set; }
+
         public StrengthExercise(string name, string description, string muscleGroup, int repetitions, int sets, int weight)
         {
             ExcersiseName = name;
@@ -19,10 +23,7 @@ namespace OperationOOP.Core.Models
             Sets = sets;
             Weight = weight;
         }
-        public string MuscleGroup { get; set; } 
-        public int Repetitions { get; set; }
-        public int Sets { get; set; }
-        public int Weight { get; set; }
+      
 
     }
 }

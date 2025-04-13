@@ -24,38 +24,53 @@ namespace OperationOOP.Core.Data
             Exercises = new List<Exercise>();
 
 
-            int workoutId = Workouts.Any() ? Workouts.Max(w => w.Id) + 1 : 1;
+
+            // Lite förgjorda övningar och workouts 
+
+            var running = new CardioExercise("Running", "30 minutes running", 30, 300)
+            {
+                Id = 1
+            };
+
+            var cycling = new CardioExercise("Cycling", "15 minutes cycling", 15, 150)
+            {
+                Id = 2
+            };
+
+            var benchPress = new StrengthExercise("Bench Press", "Chest exercise", "Chest", 10, 3, 80)
+            {
+                Id = 3
+            };
+
+            var squats = new StrengthExercise("Squats", "Leg exercise", "Legs", 12, 4, 100)
+            {
+                Id = 4
+            };
+
+            Exercises.Add(running);
+            Exercises.Add(cycling);
+            Exercises.Add(benchPress);
+            Exercises.Add(squats);
+
+   
+
+            var cardioWorkout = new Workout("Morning Cardio", 45, WorkoutLevel.Beginner, WorkoutType.Cardio)
+            {
+                Id = 1,
+                Exercises = new List<Exercise> { running, cycling }
+            };
+
+            var strengthWorkout = new Workout("Full Body Strength", 60, WorkoutLevel.Intermediate, WorkoutType.Strength)
+            {
+                Id = 2,
+                Exercises = new List<Exercise> { benchPress, squats }
+            };
+
+            Workouts.Add(cardioWorkout);
+            Workouts.Add(strengthWorkout);
 
 
-            int exerciseId = Exercises.Any() ? Exercises.Max(e => e.Id) + 1 : 1;
 
-
-            // Mappa rätt övningar till rätt workouts
-            var cardioExercise1 = new CardioExercise("Jogging", "Regular Jogg", 30, 500)
-            {Id = exerciseId++ };
-            Exercises.Add(cardioExercise1);
-
-            Workouts.Add(new CardioWorkout(
-
-                "Morning Run",
-                30,
-                WorkoutLevel.Master,
-                 CardioType.IntervalTraining,
-                new List<CardioExercise> {cardioExercise1})
-            { Id = workoutId++});
-
-            var strengthExercise1 = new StrengthExercise("Bench Press", "blablabla", "Chest", 5, 5, 80)
-            { Id=exerciseId};
-           Exercises.Add(strengthExercise1);
-
-            Workouts.Add(new StrengthWorkout(
-                "Upper Body",
-                45,
-                WorkoutLevel.Beginner,
-
-                new List<StrengthExercise> {strengthExercise1})
-            { Id = workoutId++ });
-           
         }
 
     }

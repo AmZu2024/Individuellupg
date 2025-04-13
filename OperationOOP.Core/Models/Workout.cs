@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace OperationOOP.Core.Models
 {
-    //Skapar en basklass workout som inte är instansierbar (abstract)
-    public abstract class Workout
+    
+    public  class Workout
     {
         //Skapar properties 
 
@@ -15,9 +15,20 @@ namespace OperationOOP.Core.Models
         public string Name { get; set; }
         public int Duration { get; set; }
         public WorkoutLevel Level { get; set; }
+
+        public WorkoutType Type { get; set; }
+
         //Komposition: lägger till  property där datatypen är av en klass 
         public List<Exercise> Exercises { get; set; } = new List<Exercise>();
 
+        public Workout(string name, int duration, WorkoutLevel level,WorkoutType workoutType,List<Exercise>? exercises = null)
+        {
+            Name = name;
+            Duration = duration;
+            Level = level;
+            Type = workoutType;
+            Exercises = exercises ?? new List<Exercise>();
+        }
 
     }
 
@@ -29,5 +40,11 @@ namespace OperationOOP.Core.Models
         Master
     }
 
-    
+    public enum WorkoutType
+    {
+        Strength,
+        Cardio
+    }
+
+
 }

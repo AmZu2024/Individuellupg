@@ -11,7 +11,7 @@ namespace OperationOOP.Core.Models
         public int Duration { get; set; }
         public int CaloriesBurned { get; set; }
 
-        public CardioExercise() { } 
+      
         public CardioExercise(string name, string description , int duration, int caloriesBurned) 
         {
             

@@ -27,13 +27,14 @@
         private static List<Response> Handle(IDatabase db)
         {
             return db.Workouts
-                .OfType<StrengthWorkout>()
+                .Where(workout=>workout.Type==WorkoutType.Strength)
                 .Select(workout => new Response(
                     Id: workout.Id,
                     Name: workout.Name,
                     Duration: workout.Duration,
                     Level: workout.Level,
-                    Exercises: workout.StrengthExercises
+                    Exercises: workout.Exercises
+                    .OfType<StrengthExercise>()
                         .Select(exercise => new StrengthExerciseResponse(
                             Id: exercise.Id,
                             ExerciseName: exercise.ExcersiseName,

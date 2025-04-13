@@ -16,7 +16,7 @@
         public record Response(int Id);
         private static IResult Handle(int workoutId, Request request, IDatabase db)
         {
-            var workout = db.Workouts.OfType<StrengthWorkout>().FirstOrDefault(w => w.Id == workoutId);
+            var workout = db.Workouts.FirstOrDefault(w => w.Id == workoutId &&w.Type == WorkoutType.Strength);
             if (workout == null)
             {
                 return TypedResults.NotFound($"Workout with ID {workoutId} not found.");
@@ -29,7 +29,7 @@
                 Id = nextExerciseId
             };
 
-            workout.StrengthExercises.Add(exercise);
+            
             workout.Exercises.Add(exercise);
             db.Exercises.Add(exercise);
             db.Workouts = db.Workouts.Select(w => w.Id == workout.Id ? workout : w).ToList();
